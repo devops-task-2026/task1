@@ -1,0 +1,4 @@
+aws_region  = "ap-northeast-1"
+db_name     = "devopschallenge_dev"
+db_username = "devops_dev_user"
+db_password = "manchester30"
