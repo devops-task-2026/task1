@@ -1,4 +1,3 @@
-# bootstrap/outputs.tf
 output "buckets_created" {
   value = {
     dev     = "devops-challenge-tfstate-dev"
