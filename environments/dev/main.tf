@@ -1,26 +1,3 @@
-# environments/dev/main.tf
-terraform {
-  required_version = ">= 1.5.0"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.5"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.aws_region
-}
-
 locals {
   environment = "dev"
 
@@ -42,7 +19,6 @@ locals {
     "ap-northeast-1c"
   ]
 
-  # Development specifications
   ec2_instance_type     = "t3.micro"
   rds_instance_class    = "db.t3.micro"
   rds_allocated_storage = 20
@@ -55,7 +31,6 @@ locals {
   }
 }
 
-# Create Key Pair automatically
 resource "tls_private_key" "devops_challenge_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -66,7 +41,6 @@ resource "aws_key_pair" "devops_challenge_key" {
   public_key = tls_private_key.devops_challenge_key.public_key_openssh
 }
 
-# VPC Module
 module "vpc" {
   source = "../../modules/vpc"
 
@@ -80,7 +54,6 @@ module "vpc" {
   tags = local.common_tags
 }
 
-# Security Module
 module "security" {
   source = "../../modules/security"
 
@@ -91,7 +64,6 @@ module "security" {
   tags = local.common_tags
 }
 
-# EC2 Module
 module "ec2" {
   source = "../../modules/ec2"
 
@@ -104,7 +76,6 @@ module "ec2" {
   tags = local.common_tags
 }
 
-# RDS Module
 module "rds" {
   source = "../../modules/rds"
 

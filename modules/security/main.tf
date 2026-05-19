@@ -1,5 +1,3 @@
-# modules/security/main.tf
-# Security Group for EC2 Instance
 resource "aws_security_group" "devops_challenge_ec2_sg" {
   name        = "devops-challenge-${var.environment}-ec2-sg"
   description = "Security group for DevOps Challenge EC2 instance"

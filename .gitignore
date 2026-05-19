@@ -1,0 +1,27 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+
+# Terraform variables (sensitive)
+terraform.tfvars
+*.tfvars
+
+# Keys (VERY IMPORTANT)
+*.pem
+
+# Crash logs
+crash.log
+
+# Providers (never commit)
+**/.terraform/*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

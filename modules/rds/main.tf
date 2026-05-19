@@ -1,8 +1,5 @@
-# modules/rds/main.tf
-# Generate random password if not provided (for automation)
 resource "random_password" "db_password" {
   count = var.db_password == "" ? 1 : 0
-
   length           = 16
   special          = true
   override_special = "!#$%&*?"
@@ -16,7 +13,7 @@ resource "aws_db_instance" "devops_challenge_rds" {
   engine_version = "15"
   instance_class = var.instance_class
 
-  db_name = var.db_name
+  db_name       = var.db_name
   username      = var.db_username
   password      = var.db_password != "" ? var.db_password : random_password.db_password[0].result
 
