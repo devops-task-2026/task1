@@ -1,4 +1,3 @@
-# bootstrap/main.tf
 terraform {
   required_version = ">= 1.5.0"
   
@@ -14,9 +13,8 @@ terraform {
   }
 }
 
-# CHANGE THIS TO ap-northeast-1
 provider "aws" {
-  region = "ap-northeast-1"  # ← Your credentials work here
+  region = "ap-northeast-1"
 }
 
 locals {
@@ -30,7 +28,6 @@ locals {
   }
 }
 
-# Create S3 buckets for each environment
 resource "aws_s3_bucket" "terraform_state" {
   for_each = toset(local.environments)
   
