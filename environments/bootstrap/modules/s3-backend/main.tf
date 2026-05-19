@@ -1,12 +1,8 @@
-# bootstrap/modules/s3-backend/main.tf
-# Reusable module for creating S3 backend infrastructure
-
-# S3 Bucket for Terraform State
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket_name
   
   # Prevent accidental deletion of state bucket
-  force_destroy = var.environment != "prod"  # Production buckets are protected
+  force_destroy = var.environment != "prod" 
   
   tags = merge(var.tags, {
     Name        = "terraform-state-${var.environment}"
